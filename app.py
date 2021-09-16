@@ -24,7 +24,7 @@ from flask import (
     session,
     url_for,
 )
-from flask.ext.login import (
+from flask_login import (
     LoginManager,
     UserMixin,
     current_user,
@@ -51,7 +51,7 @@ import requests
 #   for your concept of "customer company", "group", "organization", or "team"
 metadata_url_for = {
     # For testing with http://saml.oktadev.com use the following:
-    # 'test': 'http://idp.oktadev.com/metadata',
+     'test': 'http://idp.oktadev.com/metadata',
     # WARNING WARNING WARNING
     #   You MUST remove the testing IdP from a production system,
     #   as the testing IdP will allow ANYBODY to log in as ANY USER!
@@ -189,7 +189,7 @@ def sp_initiated(idp_name):
     redirect_url = None
     # Select the IdP URL to send the AuthN request to
     for key, value in info['headers']:
-        if key is 'Location':
+        if key == 'Location':
             redirect_url = value
     response = redirect(redirect_url, code=302)
     # NOTE:
