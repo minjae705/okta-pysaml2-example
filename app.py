@@ -118,6 +118,7 @@ def saml_client_for(idp_name=None):
                 'want_response_signed': False,
             },
         },
+        'entityid': 'https://example.com/sp/metadata', 
     }
     spConfig = Saml2Config()
     spConfig.load(settings)
@@ -207,7 +208,9 @@ def sp_initiated(idp_name):
 @app.route("/user")
 @login_required
 def user():
-    return render_template('user.html', session=session)
+#   return render_template('user.html', session=session)
+    msg = "Hello {user.first_name} {user.last_name}".format(user=current_user)
+    return msg
 
 
 @app.errorhandler(401)
